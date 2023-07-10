@@ -1,0 +1,49 @@
+.wrapper {
+    max-width: 46rem;
+    margin: -1.6875rem auto;
+    padding: 0 1rem;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+.commentForm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.commentForm textarea {
+    width: 100%;
+    height: 3.375rem;
+    border-radius: 8px;
+    resize: none;
+    padding: 1rem;
+    border: 1px solid var(--gray-700);
+    background: var(--gray-500);
+    color: var(--gray-300);
+}
+
+.commentForm button[type=submit] {
+    background: var(--blue-dark);
+    color: var(--gray-100);
+    font-size: 0.875rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+
+    transition: background-color 0.1s;
+}
+
+.commentForm button[type=submit]:hover {
+    background-color: var(--blue);
+}
