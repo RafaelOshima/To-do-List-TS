@@ -6,18 +6,17 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 4rem;
 }
 
-.commentForm {
+.taskForm {
     width: 100%;
     display: flex;
     justify-content: center;
     gap: 0.5rem;
 }
 
-.commentForm textarea {
+.taskForm textarea {
     width: 100%;
     height: 3.375rem;
     border-radius: 8px;
@@ -28,7 +27,7 @@
     color: var(--gray-300);
 }
 
-.commentForm button[type=submit] {
+.taskForm button[type=submit] {
     background: var(--blue-dark);
     color: var(--gray-100);
     font-size: 0.875rem;
@@ -44,6 +43,35 @@
     transition: background-color 0.1s;
 }
 
-.commentForm button[type=submit]:hover {
+.taskForm button[type=submit]:hover {
     background-color: var(--blue);
+}
+
+.taskList > header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.createdTasks {
+    color: var(--blue);
+}
+
+.doneTasks {
+    color: var(--purple);
+}
+
+.taskList > header span {
+    margin-left: 0.5rem;
+    background-color: var(--gray-400);
+    padding: 0 0.5rem;
+    border-radius: 15px;
+    color: var(--gray-200);
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.tasks {
+    margin-top: 1.5rem;
 }

@@ -18,7 +18,7 @@
 
 :focus {
     outline: transparent;
-    box-shadow: 0 0 0 2px var(--green-500);
+    box-shadow: 0 0 0 2px var(--blue-dark);
 }
 
 * {
@@ -34,7 +34,16 @@ body {
 }
 
 body, input, textarea, button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     font-family: 'Inter', sans-serif;
     font-weight: 140%;
     font-size: 1rem;
+}
+
+@media(max-width: 740px) {
+    html{
+        font-size: 87.5%;
+    }
 }
