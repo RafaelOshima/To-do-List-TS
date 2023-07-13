@@ -1,19 +1,43 @@
 import  './global.css'
 import styles from './App.module.css'
 import { PlusCircle } from '@phosphor-icons/react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { Header } from './components/Header'
 import { Task } from './components/Task'
 import { NoTasks } from './components/NoTasks'
 
 export function App() {
+  const [tasks, setTasks] = useState([
+    'muito legaaaaaaaaaaaaal'
+  ])
+
+  const [newTaskText, setNewTaskText] = useState('')
+
+  function handleCreateNewTask(event: FormEvent) {
+    event.preventDefault()
+
+    setTasks([...tasks, newTaskText])
+
+    setNewTaskText('')
+  }
+
+  function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    setNewTaskText(event.target.value)
+    
+  }
+
   return (
     <div>
       <Header />
 
       <div className={styles.wrapper}>
-        <form className={styles.taskForm}>
-          <textarea placeholder='Adicione uma nova tarefa'></textarea>
+        <form onSubmit={handleCreateNewTask} className={styles.taskForm}>
+          <textarea 
+            onChange={handleNewTaskChange} 
+            value={newTaskText} 
+            placeholder='Adicione uma nova tarefa' 
+          />
           <button type='submit'>Criar <PlusCircle size={20} /></button>
         </form>
         
@@ -24,7 +48,12 @@ export function App() {
           </header>
 
           <div className={styles.tasks}>
-            < NoTasks />
+            {tasks.map(task => {
+              return (
+                < Task key={task} content={task} />
+              ) 
+            })}
+            
           </div>
           
         </div>
