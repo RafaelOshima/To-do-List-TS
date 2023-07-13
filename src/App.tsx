@@ -1,16 +1,14 @@
 import  './global.css'
 import styles from './App.module.css'
 import { PlusCircle } from '@phosphor-icons/react'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 
 import { Header } from './components/Header'
 import { Task } from './components/Task'
 import { NoTasks } from './components/NoTasks'
 
 export function App() {
-  const [tasks, setTasks] = useState([
-    'muito legaaaaaaaaaaaaal'
-  ])
+  const [tasks, setTasks] = useState<string[]>([])
 
   const [newTaskText, setNewTaskText] = useState('')
 
@@ -23,9 +21,24 @@ export function App() {
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity('')
+
     setNewTaskText(event.target.value)
     
   }
+
+  function deleteTask(taskToDelete: string) {
+    const tasksWithoutDeletedOne = tasks.filter(task => {
+      return task != taskToDelete
+    })
+
+    setTasks(tasksWithoutDeletedOne)
+  }
+
+  function handleNewTaskInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity('Preencha o campo para adicionar novas tarefas!')
+  }
+
 
   return (
     <div>
@@ -35,10 +48,12 @@ export function App() {
         <form onSubmit={handleCreateNewTask} className={styles.taskForm}>
           <textarea 
             onChange={handleNewTaskChange} 
+            onInvalid={handleNewTaskInvalid}
             value={newTaskText} 
             placeholder='Adicione uma nova tarefa' 
+            required
           />
-          <button type='submit'>Criar <PlusCircle size={20} /></button>
+          <button disabled={newTaskText.length === 0} type='submit'>Criar <PlusCircle size={20} /></button>
         </form>
         
         <div className={styles.taskList}>
@@ -48,12 +63,13 @@ export function App() {
           </header>
 
           <div className={styles.tasks}>
-            {tasks.map(task => {
-              return (
-                < Task key={task} content={task} />
-              ) 
-            })}
-            
+            {
+              tasks.length == 0 ? < NoTasks /> : tasks.map(task => {
+                return (
+                  < Task onDeleteTask={deleteTask} key={task} content={task} />
+                ) 
+              })
+            }         
           </div>
           
         </div>

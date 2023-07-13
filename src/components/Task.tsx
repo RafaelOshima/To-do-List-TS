@@ -3,16 +3,21 @@ import styles from './Task.module.css'
 
 interface TaskProps {
     content: string;
+    onDeleteTask: (task: string) => void;
 }
 
-export function Task({ content }: TaskProps) {
+export function Task({ content, onDeleteTask }: TaskProps) {
+    function handleDeleteTask() {
+        onDeleteTask(content)
+    }
+    
     return (
         <div className={styles.task}>
             <div className={styles.inputContainer}>
                 <input type="checkbox" />
             </div>
             <p>{content}</p>
-            <button title='Remover tarefa'>
+            <button onClick={handleDeleteTask} title='Remover tarefa'>
                 < Trash size={18} />
             </button>
         </div>
