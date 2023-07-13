@@ -12,6 +12,8 @@ export function App() {
 
   const [newTaskText, setNewTaskText] = useState('')
 
+  const [checkSum, setCheckSum] = useState(0)
+
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
 
@@ -39,6 +41,10 @@ export function App() {
     event.target.setCustomValidity('Preencha o campo para adicionar novas tarefas!')
   }
 
+  function checkTask (task: number) {
+    setCheckSum(checkSum + task)
+  }
+
 
   return (
     <div>
@@ -58,15 +64,15 @@ export function App() {
         
         <div className={styles.taskList}>
           <header>
-            <p className={styles.createdTasks}>Tarefas criadas <span>5</span></p>
-            <p className={styles.doneTasks}>Concluídas <span>2 de 5</span></p>
+            <p className={styles.createdTasks}>Tarefas criadas <span>{tasks.length}</span></p>
+            <p className={styles.doneTasks}>Concluídas <span>{checkSum} de {tasks.length}</span></p>
           </header>
 
           <div className={styles.tasks}>
             {
               tasks.length == 0 ? < NoTasks /> : tasks.map(task => {
                 return (
-                  < Task onDeleteTask={deleteTask} key={task} content={task} />
+                  < Task onCheckTask={checkTask} onDeleteTask={deleteTask} key={task} content={task} />
                 ) 
               })
             }         
