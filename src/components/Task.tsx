@@ -1,37 +1,34 @@
 import { Trash } from '@phosphor-icons/react'
 import styles from './Task.module.css'
-import { useState } from 'react';
 
 interface TaskProps {
     content: string;
+    status: boolean;
+    id: string;
     onDeleteTask: (task: string) => void;
-    onCheckTask: (task: number) => void;
+    onCheckTask: (task: string) => void;
 }
 
-export function Task({ content, onDeleteTask, onCheckTask }: TaskProps) {
-    const [isChecked, setIsChecked] = useState(false)
-
+export function Task({ content, status, id, onDeleteTask, onCheckTask }: TaskProps) {
     function handleDeleteTask() {
         onDeleteTask(content)
     }
 
     function handleCheckBoxChange() {
-        setIsChecked(!isChecked)
-
-        isChecked == false ? onCheckTask(1) : onCheckTask(-1)
+        onCheckTask(id)
     }
     
     return (
-        <div className={isChecked ? styles.taskDone : styles.task}>
+        <div className={status ? styles.taskDone : styles.task}>
             <div className={styles.inputContainer}>
                 <input 
                     className={styles.check}
                     type="checkbox" 
-                    checked={isChecked}
+                    checked={undefined}
                     onChange={handleCheckBoxChange}
                 />
             </div>
-            <p className={isChecked ? styles.done : ''} >{content}</p>
+            <p className={status ? styles.done : ''} >{content}</p>
             <button className={styles.trashButton} onClick={handleDeleteTask} title='Remover tarefa'>
                 < Trash size={18} />
             </button>
