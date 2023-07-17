@@ -44,7 +44,7 @@ export function App() {
 
   function deleteTask(taskToDelete: string) {
     const tasksWithoutDeletedOne = tasks.filter(task => {
-      return task.content != taskToDelete
+      return task.id != taskToDelete
     })
 
     setTasks(tasksWithoutDeletedOne)

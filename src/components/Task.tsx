@@ -11,7 +11,7 @@ interface TaskProps {
 
 export function Task({ content, status, id, onDeleteTask, onCheckTask }: TaskProps) {
     function handleDeleteTask() {
-        onDeleteTask(content)
+        onDeleteTask(id)
     }
 
     function handleCheckBoxChange() {
